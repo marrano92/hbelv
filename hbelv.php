@@ -26,12 +26,24 @@ if ( file_exists( DKWP_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
 }
 
 /**
- * Plugins loaded action
+ * Init action
  *
  * @return void
  */
-function hbelv_plugins_loaded() {
-	load_plugin_textdomain( 'hbelv', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
-}
+add_action( 'init', function () {
+	/**
+	 * WP actions removal
+	 */
+	remove_action( 'wp_head', 'rest_output_link_wp_head' );
+	remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+	remove_action( 'wp_head', 'wlwmanifest_link' );
+	remove_action( 'wp_head', 'rsd_link' );
+	remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+	remove_action( 'template_redirect', 'rest_output_link_header', 11 );
 
-add_action( 'plugins_loaded', 'dkwp_plugins_loaded' );
+	/**
+	 * Plugin builders
+	 */
+	\Hbelv\Cpt\Builder::init();
+
+});
