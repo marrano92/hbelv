@@ -27,6 +27,17 @@ if ( file_exists( HBELV_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
 }
 
 /**
+ * Shorthand for a PluginOptions instance
+ *
+ * @return \Hbelv\PluginOptions
+ */
+function options_factory() {
+	$locale = \Hbelv\Locale::create();
+
+	return \Hbelv\PluginOptions::create( $locale );
+}
+
+/**
  * Init action
  *
  * @return void
@@ -46,5 +57,6 @@ add_action( 'init', function () {
 	 * Plugin builders
 	 */
 	\Hbelv\Cpt\Builder::init();
+	\Hbelv\Route\Builder::init();
 
 });
