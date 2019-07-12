@@ -16,8 +16,6 @@ class Builder implements BuilderInterface {
 	 */
 	public static function init() {
 			Menus::init();
-
-		Model::init();
 	}
 
 }

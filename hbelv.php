@@ -17,12 +17,13 @@ Text Domain: hbelv
 
 defined( 'ABSPATH' ) || die( 'Error 403: Access Denied/Forbidden!' );
 defined( 'HOUR_IN_SECONDS' ) || define( 'HOUR_IN_SECONDS', 3600 );
+define( 'HBELV_PLUGIN_DIR', ( function_exists( 'plugin_dir_path' ) ? plugin_dir_path( __FILE__ ) : __DIR__ . '/' ) );
 
 /**
  * Autoloader init
  */
-if ( file_exists( DKWP_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
-	require_once DKWP_PLUGIN_DIR . 'vendor/autoload.php';
+if ( file_exists( HBELV_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
+	require_once HBELV_PLUGIN_DIR . 'vendor/autoload.php';
 }
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dkwp\Cpt;
+namespace Hbelv\Cpt;
 
 /**
  * Interface CptInterface
