@@ -4,7 +4,7 @@ namespace Hbelv\Cpt;
 
 /**
  * Interface CptInterface
- * @package Dkwp\Cpt
+ * @package Hbelv\Cpt
  */
 interface CptInterface {
 

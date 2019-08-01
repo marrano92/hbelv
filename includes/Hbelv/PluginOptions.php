@@ -35,7 +35,7 @@ class PluginOptions {
 
 			$registry->set( __CLASS__, $object );
 
-			add_action( 'dkwp/set_plugin_option', [ $object, 'set' ], 10, 2 );
+			add_action( 'hbelv/set_plugin_option', [ $object, 'set' ], 10, 2 );
 			add_filter( 'drivek_plugin_options', [ $object, 'get' ], 10, 2 );
 		}
 

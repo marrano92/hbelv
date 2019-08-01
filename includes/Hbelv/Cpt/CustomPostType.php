@@ -43,9 +43,6 @@ class CustomPostType {
 	public function query_vars( $vars ) {
 		$arr = [
 			'promo_source',
-			'gclid',
-			'mnuid',
-			'mnref'
 		];
 
 		return QueryVars::add( $vars, $arr );
