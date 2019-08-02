@@ -19,7 +19,9 @@ class Menus extends CustomPostType implements CptInterface, MetaBoxInterface {
 	 * @return CustomPostType
 	 */
 	public function register_hooks(): CustomPostType {
+
 		add_filter( 'query_vars', [ $this, 'query_vars' ] );
+		add_action( 'admin_footer', [ $this, 'my_action_javascript' ] );
 
 		return $this;
 	}
@@ -39,36 +41,45 @@ class Menus extends CustomPostType implements CptInterface, MetaBoxInterface {
 				'priority' => 'high',
 				'fields'   => [
 					[
-						'name'  => __( 'Menu Restaurant subtitle', 'hbelv' ),
+						'name'  => __( 'Nome Menu', 'hbelv' ),
+						'id'    => '_menu-name',
+						'type'  => 'text',
+						'std'   => '',
+						'title' => __( 'Nome Menu', 'hbelv' ),
+						'desc'  => __( 'Inserisci il nome del menu', 'hbelv' )
+					],
+					[
+						'name'  => __( 'Sottotitolo Menu', 'hbelv' ),
 						'id'    => '_menu-subtitle',
-						'type'  => 'textarea',
+						'type'  => 'text',
 						'std'   => '',
-						'title' => __( 'Menu Restaurant subtitle', 'hbelv' ),
-						'desc'  => __( 'Insert the subtitle', 'hbelv' )
+						'title' => __( 'Sottotitolo Menu', 'hbelv' ),
+						'desc'  => __( 'Inserisci il sottotitolo del menu', 'hbelv' )
 					],
 					[
-						'name'  => __( 'Menu Restaurant CTA', 'hbelv' ),
-						'id'    => '_menu-cta',
-						'type'  => 'textarea',
-						'std'   => '',
-						'title' => __( 'Menu Restaurant CTA', 'hbelv' ),
-						'desc'  => __( 'Insert the CTA to show in the sidebar', 'hbelv' )
+						'name'   => __( 'Tipologia Menu', 'hbelv' ),
+						'id'     => '_menu-type',
+						'type'   => 'select',
+						'placeholder'     => 'Select an Item',
+						'options' => [
+							'default' => 'default',
+							'value1' => 'value1'
+						],
+						'std'    => '',
+						'title'  => __( 'Tipologia Menu', 'hbelv' ),
+						'desc'   => __( 'Seleziona la tipologia del menu', 'hbelv' )
 					],
 					[
-						'name'  => __( 'Menu Restaurant bottom text', 'hbelv' ),
-						'id'    => '_menu-bottomtext',
-						'type'  => 'wp_editor',
+						'name'  => __( 'Piatti Menu', 'hbelv' ),
+						'id'    => '_menu-plate',
+						'type'    => 'checkbox_list',
+						'options' => array(
+							'value1' => 'Label1',
+							'value2' => 'Label2',
+						),
 						'std'   => '',
-						'title' => __( 'Menu Restaurant bottom text', 'hbelv' ),
-						'desc'  => __( 'Insert the bottom text', 'hbelv' )
-					],
-					[
-						'name'  => __( 'Shortcode Menu Restaurant', 'hbelv' ),
-						'id'    => '_menu-shortcode',
-						'type'  => 'textarea',
-						'std'   => '',
-						'title' => __( 'Shortcode Menu Restaurant', 'hbelv' ),
-						'desc'  => __( 'Insert [dklandingsearch] shortcode. Example [dklandingsearch id="323,566,713,565,1279,148,688,1257,1204,1276" ] [dklandingsearch num=6 query="makeName=Audi"]', 'hbelv' )
+						'title' => __( 'Piatti Menu', 'hbelv' ),
+						'desc'  => __( 'Aggiungi i piatti da inserire nel menu', 'hbelv' )
 					],
 					[
 						'name'  => __( 'Project ID', 'hbelv' ),
@@ -98,7 +109,7 @@ class Menus extends CustomPostType implements CptInterface, MetaBoxInterface {
 			]
 		];
 
-		MetaBox::create()->add_config($config);
+		MetaBox::create()->add_config( $config );
 
 		return $this;
 	}
@@ -154,4 +165,11 @@ class Menus extends CustomPostType implements CptInterface, MetaBoxInterface {
 		return $this;
 	}
 
+	public function my_action_javascript(){
+		$model_selected = get_post_meta( get_the_ID(), '_landing-editorial-model', true );
+		$site           = get_site_url();
+		echo '<script type="text/javascript">
+
+			  </script>';
+	}
 }
