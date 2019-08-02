@@ -57,29 +57,26 @@ class Menus extends CustomPostType implements CptInterface, MetaBoxInterface {
 						'desc'  => __( 'Inserisci il sottotitolo del menu', 'hbelv' )
 					],
 					[
-						'name'   => __( 'Tipologia Menu', 'hbelv' ),
-						'id'     => '_menu-type',
-						'type'   => 'select',
-						'placeholder'     => 'Select an Item',
-						'options' => [
+						'name'        => __( 'Tipologia Menu', 'hbelv' ),
+						'id'          => '_menu-type',
+						'type'        => 'select',
+						'placeholder' => 'Select an Item',
+						'options'     => [
 							'default' => 'default',
-							'value1' => 'value1'
+							'value1'  => 'value1'
 						],
-						'std'    => '',
-						'title'  => __( 'Tipologia Menu', 'hbelv' ),
-						'desc'   => __( 'Seleziona la tipologia del menu', 'hbelv' )
+						'std'         => '',
+						'title'       => __( 'Tipologia Menu', 'hbelv' ),
+						'desc'        => __( 'Seleziona la tipologia del menu', 'hbelv' )
 					],
 					[
-						'name'  => __( 'Piatti Menu', 'hbelv' ),
-						'id'    => '_menu-plate',
+						'name'    => __( 'Piatti Menu', 'hbelv' ),
+						'id'      => '_menu-plate',
 						'type'    => 'checkbox_list',
-						'options' => array(
-							'value1' => 'Label1',
-							'value2' => 'Label2',
-						),
-						'std'   => '',
-						'title' => __( 'Piatti Menu', 'hbelv' ),
-						'desc'  => __( 'Aggiungi i piatti da inserire nel menu', 'hbelv' )
+						'options' => $this->get_plates(),
+						'std'     => '',
+						'title'   => __( 'Piatti Menu', 'hbelv' ),
+						'desc'    => __( 'Aggiungi i piatti da inserire nel menu', 'hbelv' )
 					],
 					[
 						'name'  => __( 'Project ID', 'hbelv' ),
@@ -151,6 +148,9 @@ class Menus extends CustomPostType implements CptInterface, MetaBoxInterface {
 			'rewrite'             => [
 				'slug' => 'menu'
 			],
+			'taxonomies' => [
+				'category'
+			],
 			'show_in_admin_bar'   => true,
 			'show_in_nav_menus'   => true,
 			'can_export'          => true,
@@ -165,11 +165,17 @@ class Menus extends CustomPostType implements CptInterface, MetaBoxInterface {
 		return $this;
 	}
 
-	public function my_action_javascript(){
+	public function my_action_javascript() {
 		$model_selected = get_post_meta( get_the_ID(), '_landing-editorial-model', true );
 		$site           = get_site_url();
 		echo '<script type="text/javascript">
 
 			  </script>';
+	}
+
+	protected function get_plates(){
+		$options = [];
+
+		return $options;
 	}
 }

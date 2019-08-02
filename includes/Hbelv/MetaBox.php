@@ -3,6 +3,7 @@
 namespace Hbelv;
 
 use Hbelv\FilterInput;
+use function Patchwork\Redefinitions\LanguageConstructs\_print;
 
 /**
  * Class MetaBox
@@ -137,23 +138,13 @@ class MetaBox {
 						echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' /> ', '<span style="display:block; padding:0.5em 0 0;">', $field['desc'], '</span>';
 						break;
 					case 'checkbox_list':
-						echo '<span class="select2 select2-container select2-container--default -acf select2-container--focus" dir="ltr" style="width: 100%;">
-							    <span class="selection">
-								    <span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
-										<ul class="select2-selection__rendered ui-sortable">
-											<li class="select2-selection__choice" title="xzcxzczc">
-											<input type="hidden" id="'.$field['id'].'" name="'.$field['id'].'[plates][]" value="xzcxzczc">
-												<span class="select2-selection__choice__remove" role="presentation">×</span>
-												xzcxzczc
-											</li>
-											<li class="select2-selection__choice" title="xzcxzczc">
-												<span class="select2-selection__choice__remove" role="presentation">×</span>
-												xzcxzczc
-											</li>
-										</ul>
-									</span>
-								</span>
-							</span>';
+						foreach ( $field['options'] as $option ) {
+							$checked = $meta == $option['value'] ? 'checked="checked"' : '';
+							printf( '<input type="checkbox"  value="%1$s" name="%2$s" id="%2$s" %3$s  />%s ', $option['value'], $field['id'], $checked );
+						}
+						break;
+					case 'number':
+						printf('<input type="number" min="0" value="%1$s" name="%2$s" id="%2$s" /> €</input>', $meta, $field['id']  );
 						break;
 					case 'wp_editor':
 						wp_editor( ( $meta ? $meta : $field['std'] ), $field['id'] );
