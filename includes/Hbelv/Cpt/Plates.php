@@ -28,25 +28,25 @@ class Plates extends CustomPostType implements CptInterface, MetaBoxInterface {
 	 */
 	public function register_post_type(): CptInterface {
 		$labels = [
-			'name'               => _x( 'Plates Restaurant', 'Plate Restaurant CPT', 'hbelv' ),
-			'singular_name'      => _x( 'Plate Restaurant', 'Plate Restaurant CPT', 'hbelv' ),
-			'menu_name'          => _x( 'Plate Restaurant', 'Plate Restaurant CPT', 'hbelv' ),
-			'name_admin_bar'     => _x( 'Plate Restaurant', 'Plate Restaurant CPT', 'hbelv' ),
-			'parent_item_colon'  => _x( 'Parent Item:', 'Plate Restaurant CPT', 'hbelv' ),
-			'all_items'          => _x( 'All Plate Restaurant', 'Plate Restaurant CPT', 'hbelv' ),
-			'add_new_item'       => _x( 'Add New Plate Restaurant', 'Plate Restaurant CPT', 'hbelv' ),
-			'add_new'            => _x( 'Add New Plate', 'Plate Restaurant CPT', 'hbelv' ),
-			'new_item'           => _x( 'New Plate Restaurant', 'Plate Restaurant CPT', 'hbelv' ),
-			'edit_item'          => _x( 'Edit Plate Restaurant', 'Plate Restaurant CPT', 'hbelv' ),
-			'update_item'        => _x( 'Update Plate Restaurant', 'Plate Restaurant CPT', 'hbelv' ),
-			'view_item'          => _x( 'View Plate Restaurant', 'Plate Restaurant CPT', 'hbelv' ),
-			'search_items'       => _x( 'Search Plate Restaurant', 'Plate Restaurant CPT', 'hbelv' ),
-			'not_found'          => _x( 'Not found', 'Plate Restaurant CPT', 'hbelv' ),
-			'not_found_in_trash' => _x( 'Not found in Trash', 'Plate Restaurant CPT', 'hbelv' ),
+			'name'               => _x( 'Dishes Restaurant', 'Dish Restaurant CPT', 'hbelv' ),
+			'singular_name'      => _x( 'Dish Restaurant', 'Dish Restaurant CPT', 'hbelv' ),
+			'menu_name'          => _x( 'Dish Restaurant', 'Dish Restaurant CPT', 'hbelv' ),
+			'name_admin_bar'     => _x( 'Dish Restaurant', 'Dish Restaurant CPT', 'hbelv' ),
+			'parent_item_colon'  => _x( 'Parent Item:', 'Dish Restaurant CPT', 'hbelv' ),
+			'all_items'          => _x( 'All Dish Restaurant', 'Dish Restaurant CPT', 'hbelv' ),
+			'add_new_item'       => _x( 'Add New Dish Restaurant', 'Dish Restaurant CPT', 'hbelv' ),
+			'add_new'            => _x( 'Add New Dish', 'Dish Restaurant CPT', 'hbelv' ),
+			'new_item'           => _x( 'New Dish Restaurant', 'Dish Restaurant CPT', 'hbelv' ),
+			'edit_item'          => _x( 'Edit Dish Restaurant', 'Dish Restaurant CPT', 'hbelv' ),
+			'update_item'        => _x( 'Update Dish Restaurant', 'Dish Restaurant CPT', 'hbelv' ),
+			'view_item'          => _x( 'View Dish Restaurant', 'Dish Restaurant CPT', 'hbelv' ),
+			'search_items'       => _x( 'Search Dish Restaurant', 'Dish Restaurant CPT', 'hbelv' ),
+			'not_found'          => _x( 'Not found', 'Dish Restaurant CPT', 'hbelv' ),
+			'not_found_in_trash' => _x( 'Not found in Trash', 'Dish Restaurant CPT', 'hbelv' ),
 		];
 		$args   = [
-			'label'               => _x( 'Plate Restaurant', 'Plate Restaurant CPT', 'hbelv' ),
-			'description'         => _x( 'List menus of restaurant', 'Plate Restaurant CPT', 'hbelv' ),
+			'label'               => _x( 'Dish Restaurant', 'Dish Restaurant CPT', 'hbelv' ),
+			'description'         => _x( 'List menus of restaurant', 'Dish Restaurant CPT', 'hbelv' ),
 			'labels'              => $labels,
 			'supports'            => array( 'title', 'thumbnail', 'custom-fields', 'page-attributes', ),
 			'hierarchical'        => true,
@@ -54,7 +54,7 @@ class Plates extends CustomPostType implements CptInterface, MetaBoxInterface {
 			'show_ui'             => true,
 			'show_in_menu'        => true,
 			'menu_position'       => 20,
-			'menu_icon'           => 'dashicons-media-text',
+			'menu_icon'           => 'dashicons-carrot',
 			'rewrite'             => [
 				'slug' => 'menu'
 			],
@@ -82,25 +82,25 @@ class Plates extends CustomPostType implements CptInterface, MetaBoxInterface {
 		$config = [
 			$this->post_type => [
 				'id'       => 'plates-meta-box',
-				'title'    => 'Plate menu Options',
+				'title'    => 'Dish menu Options',
 				'page'     => 'plates_page',
 				'context'  => 'normal',
 				'priority' => 'high',
 				'fields'   => [
 					[
-						'name'  => __( 'Name dish', 'hbelv' ),
+						'name'  => __( 'Dish name', 'hbelv' ),
 						'id'    => '_plate-name',
 						'type'  => 'text',
 						'std'   => '',
-						'title' => __( 'Name dish', 'hbelv' ),
+						'title' => __( 'Dish name', 'hbelv' ),
 						'desc'  => __( 'Insert the name of dish', 'hbelv' )
 					],
 					[
-						'name'  => __( 'Name dish in english', 'hbelv' ),
+						'name'  => __( 'Dish name in english', 'hbelv' ),
 						'id'    => '_plate-eng-subtitle',
 						'type'  => 'text',
 						'std'   => '',
-						'title' => __( 'Name dish in english', 'hbelv' ),
+						'title' => __( 'Dish name in english', 'hbelv' ),
 						'desc'  => __( 'Insert the name of dish in english', 'hbelv' )
 					],
 					[
@@ -118,11 +118,11 @@ class Plates extends CustomPostType implements CptInterface, MetaBoxInterface {
 						'desc'        => __( 'Select the type of dish', 'hbelv' )
 					],
 					[
-						'name'    => __( 'Price dish', 'hbelv' ),
+						'name'    => __( 'Dish price', 'hbelv' ),
 						'id'      => '_plate-price',
 						'type'    => 'number',
 						'std'     => '',
-						'title'   => __( 'Price dish', 'hbelv' ),
+						'title'   => __( 'Dish price', 'hbelv' ),
 						'desc'    => __( 'Add price for dish', 'hbelv' )
 					],
 					[
