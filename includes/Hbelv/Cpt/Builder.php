@@ -17,6 +17,7 @@ class Builder implements BuilderInterface {
 	public static function init() {
 			Menus::init();
 			Plates::init();
+			Rooms::init();
 	}
 
 }
