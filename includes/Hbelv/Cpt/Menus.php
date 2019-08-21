@@ -32,6 +32,15 @@ class Menus extends CustomPostType implements CptInterface, MetaBoxInterface {
 	 * @codeCoverageIgnore
 	 */
 	public function setup_metabox(): MetaBoxInterface {
+		$args = [
+			'post_type'        => 'plates_page',
+			'post_status'      => 'publish'
+		];
+		$posts_array = get_posts( $args );
+		$posts_titles = array_map( function ($post) {
+			return ['value' => get_the_title($post) ];
+		}, $posts_array);
+
 		$config = [
 			$this->post_type => [
 				'id'       => 'menu-meta-box',
@@ -73,7 +82,7 @@ class Menus extends CustomPostType implements CptInterface, MetaBoxInterface {
 						'name'    => __( 'Piatti Menu', 'hbelv' ),
 						'id'      => '_menu-plate',
 						'type'    => 'checkbox_list',
-						'options' => $this->get_plates(),
+						'options' => $posts_titles,
 						'std'     => '',
 						'title'   => __( 'Piatti Menu', 'hbelv' ),
 						'desc'    => __( 'Aggiungi i piatti da inserire nel menu', 'hbelv' )

@@ -144,7 +144,7 @@ class MetaBox {
 						}
 						break;
 					case 'number':
-						printf('<input type="number" min="0" value="%1$s" name="%2$s" id="%2$s" /> €</input>', $meta, $field['id']  );
+						printf( '<input type="number" min="0" value="%1$s" name="%2$s" id="%2$s" /> €</input>', $meta, $field['id'] );
 						break;
 					case 'wp_editor':
 						wp_editor( ( $meta ? $meta : $field['std'] ), $field['id'] );
