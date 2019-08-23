@@ -60,3 +60,12 @@ add_action( 'init', function () {
 	\Hbelv\Route\Builder::init();
 
 });
+
+/**
+ * Admin menu action
+ *
+ * @return void
+ */
+add_action( 'admin_menu', function () {
+	\Hbelv\OptionsPage::init( options_factory() );
+} );

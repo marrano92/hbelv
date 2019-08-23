@@ -7,6 +7,54 @@ namespace Hbelv;
 class PluginOptions {
 
 	/**
+	 * Protected class vars
+	 *
+	 * @var string $options_name
+	 * @var array $options_value
+	 * @var array $default_values
+	 */
+	protected
+		$option_name,
+		$option_value,
+		$default_values;
+
+	/**
+	 * Private class var
+	 *
+	 * @var Locale
+	 */
+	private $_locale;
+
+
+	/**
+	 * Constructor
+	 *
+	 * @param Locale $locale
+	 * @param string $option_name
+	 * @param array $default_values
+	 */
+	public function __construct( Locale $locale, $option_name, $default_values = [] ) {
+		$this->_locale = $locale;
+
+		$this->option_name    = $option_name;
+		$this->option_value   = get_option( $this->option_name );
+		$this->default_values = $default_values;
+	}
+
+	/**
+	 * Does this key already have a filter function?
+	 *
+	 * @codeCoverageIgnore
+	 *
+	 * @param $key
+	 *
+	 * @return bool
+	 */
+	public function has_filter( $key ) {
+		return has_filter( "hb/hbelv_{$key}" );
+	}
+
+	/**
 	 * Factory
 	 *
 	 * @codeCoverageIgnore
@@ -40,5 +88,41 @@ class PluginOptions {
 		}
 
 		return $object;
+	}
+
+	/**
+	 * Gets an item with a default as fallback
+	 *
+	 * @param $key
+	 * @param mixed $default
+	 *
+	 * @return mixed
+	 */
+	public function get( $key, $default = '' ) {
+		if ( '' === $default && isset( $this->default_values[ $key ] ) ) {
+			$default = $this->default_values[ $key ];
+		}
+		$value = ! empty( $this->option_value[ $key ] ) ? $this->option_value[ $key ] : $default;
+
+		return $value;
+	}
+
+	/**
+	 * Magic getter
+	 *
+	 * @param $key
+	 *
+	 * @return mixed
+	 */
+	public function __get( $key ) {
+		return $this->get( $key );
+	}
+
+	/**
+	 * Gets the name of the option
+	 * @return string
+	 */
+	public function get_name() {
+		return $this->option_name;
 	}
 }
