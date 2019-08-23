@@ -16,17 +16,6 @@ class Menus extends CustomPostType implements CptInterface, MetaBoxInterface {
 	protected $post_type = 'menu_page';
 
 	/**
-	 * @return CustomPostType
-	 */
-	public function register_hooks(): CustomPostType {
-
-		add_filter( 'query_vars', [ $this, 'query_vars' ] );
-		add_action( 'admin_footer', [ $this, 'my_action_javascript' ] );
-
-		return $this;
-	}
-
-	/**
 	 * @return static
 	 *
 	 * @codeCoverageIgnore
@@ -40,7 +29,6 @@ class Menus extends CustomPostType implements CptInterface, MetaBoxInterface {
 		$posts_titles = array_map( function ($post) {
 			return ['value' => get_the_title($post) ];
 		}, $posts_array);
-
 		$config = [
 			$this->post_type => [
 				'id'       => 'menu-meta-box',
@@ -168,23 +156,14 @@ class Menus extends CustomPostType implements CptInterface, MetaBoxInterface {
 			'publicly_queryable'  => true,
 			'capability_type'     => 'page',
 		];
-
 		register_post_type( 'menu_page', $args );
 
 		return $this;
 	}
 
 	public function my_action_javascript() {
-		$model_selected = get_post_meta( get_the_ID(), '_landing-editorial-model', true );
-		$site           = get_site_url();
 		echo '<script type="text/javascript">
 
 			  </script>';
-	}
-
-	protected function get_plates(){
-		$options = [];
-
-		return $options;
 	}
 }

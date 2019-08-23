@@ -8,6 +8,10 @@ use Hbelv\MetaBox;
 
 class Rooms extends CustomPostType implements CptInterface, MetaBoxInterface {
 
+	/**
+	 * @var string
+	 */
+	protected $post_type = 'rooms';
 
 	/**
 	 * @return CptInterface
@@ -52,7 +56,6 @@ class Rooms extends CustomPostType implements CptInterface, MetaBoxInterface {
 			'publicly_queryable'  => true,
 			'capability_type'     => 'page',
 		];
-
 		register_post_type( 'rooms', $args );
 
 		$labels = array(
@@ -68,7 +71,6 @@ class Rooms extends CustomPostType implements CptInterface, MetaBoxInterface {
 			'new_item_name'     => __( 'New Type Room Name', 'textdomain' ),
 			'menu_name'         => __( 'Types Rooms', 'textdomain' ),
 		);
-
 		$args = array(
 			'hierarchical'      => true,
 			'labels'            => $labels,
@@ -77,7 +79,6 @@ class Rooms extends CustomPostType implements CptInterface, MetaBoxInterface {
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => 'categories-rooms' ),
 		);
-
 		register_taxonomy( 'categories-rooms', 'rooms', $args );
 
 		return $this;
@@ -104,43 +105,52 @@ class Rooms extends CustomPostType implements CptInterface, MetaBoxInterface {
 						'desc'  => __( 'Insert the name of dish', 'hbelv' )
 					],
 					[
-						'name'  => __( 'Room name in english', 'hbelv' ),
-						'id'    => '_room-eng-subtitle',
-						'type'  => 'text',
-						'std'   => '',
-						'title' => __( 'Room name in english', 'hbelv' ),
-						'desc'  => __( 'Insert the name of dish in english', 'hbelv' )
-					],
-					[
-						'name'        => __( 'Type of dish', 'hbelv' ),
-						'id'          => '_room-type',
-						'type'        => 'select',
-						'placeholder' => 'Select type',
-						'options'     => [],
-						'std'         => '',
-						'title'       => __( 'Type of dish', 'hbelv' ),
-						'desc'        => __( 'Select the type of dish', 'hbelv' )
-					],
-					[
-						'name'  => __( 'Room price', 'hbelv' ),
-						'id'    => '_room-price',
+						'name'  => __( 'Room guest', 'hbelv' ),
+						'id'    => '_room-guest',
 						'type'  => 'number',
 						'std'   => '',
-						'title' => __( 'Room price', 'hbelv' ),
-						'desc'  => __( 'Add price for dish', 'hbelv' )
+						'title' => __( 'Room guest', 'hbelv' ),
+						'desc'  => __( 'Insert the number of guest for this room', 'hbelv' )
 					],
 					[
-						'name'    => __( 'Note', 'hbelv' ),
-						'id'      => '_room-note',
-						'type'    => 'select',
-						'options' => [
-							'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-							'Pellentesque in tellus ornare, blandit nulla eget, convallis felis.',
-							'Sed egestas consectetur rutrum, Nunc et lorem varius, aliquet lectus ut.'
-						],
-						'std'     => '',
-						'title'   => __( 'Note', 'hbelv' ),
-						'desc'    => __( 'Select a note to add', 'hbelv' )
+						'name'  => __( 'Room size', 'hbelv' ),
+						'id'    => '_room-size',
+						'type'  => 'number',
+						'std'   => '',
+						'title' => __( 'Room size', 'hbelv' ),
+						'desc'  => __( 'Insert size of room', 'hbelv' )
+					],
+					[
+						'name'  => __( 'Price Low Season', 'hbelv' ),
+						'id'    => '_room-price-low',
+						'type'  => 'currency',
+						'std'   => '',
+						'title' => __( 'Price Low Season', 'hbelv' ),
+						'desc'  => __( 'Insert price of room in low season', 'hbelv' )
+					],
+					[
+						'name'  => __( 'Price peak season', 'hbelv' ),
+						'id'    => '_room-price-peak',
+						'type'  => 'currency',
+						'std'   => '',
+						'title' => __( 'Price peak season', 'hbelv' ),
+						'desc'  => __( 'Insert price of room in peak season', 'hbelv' )
+					],
+					[
+						'name'  => __( 'Price high season', 'hbelv' ),
+						'id'    => '_room-price-high',
+						'type'  => 'currency',
+						'std'   => '',
+						'title' => __( 'Price high season', 'hbelv' ),
+						'desc'  => __( 'Insert price of room in high season', 'hbelv' )
+					],
+					[
+						'name'  => __( 'Room description', 'hbelv' ),
+						'id'    => '_room-description',
+						'type'  => 'wp_editor',
+						'std'   => '',
+						'title' => __( 'Room description', 'hbelv' ),
+						'desc'  => __( 'Add rooms description', 'hbelv' )
 					]
 				]
 			]

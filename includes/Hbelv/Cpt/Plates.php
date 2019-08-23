@@ -14,16 +14,6 @@ class Plates extends CustomPostType implements CptInterface, MetaBoxInterface {
 	protected $post_type = 'plates_page';
 
 	/**
-	 * @return CustomPostType
-	 */
-	public function register_hooks(): CustomPostType {
-
-		add_filter( 'query_vars', [ $this, 'query_vars' ] );
-
-		return $this;
-	}
-
-	/**
 	 * @return CptInterface
 	 */
 	public function register_post_type(): CptInterface {
@@ -66,7 +56,6 @@ class Plates extends CustomPostType implements CptInterface, MetaBoxInterface {
 			'publicly_queryable'  => true,
 			'capability_type'     => 'page',
 		];
-
 		register_post_type( 'plates_page', $args );
 
 		$labels = array(
@@ -82,7 +71,6 @@ class Plates extends CustomPostType implements CptInterface, MetaBoxInterface {
 			'new_item_name'     => __( 'New Type Name', 'textdomain' ),
 			'menu_name'         => __( 'Types', 'textdomain' ),
 		);
-
 		$args = array(
 			'hierarchical'      => true,
 			'labels'            => $labels,
@@ -91,7 +79,6 @@ class Plates extends CustomPostType implements CptInterface, MetaBoxInterface {
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => 'types-dishes' ),
 		);
-
 		register_taxonomy( 'types-dishes', 'plates_page', $args );
 
 		return $this;
@@ -107,7 +94,6 @@ class Plates extends CustomPostType implements CptInterface, MetaBoxInterface {
 			'orderby' => 'id'
 		];
 		$categories = get_terms( $args );
-
 		$config = [
 			$this->post_type => [
 				'id'       => 'plates-meta-box',
@@ -147,7 +133,7 @@ class Plates extends CustomPostType implements CptInterface, MetaBoxInterface {
 					[
 						'name'  => __( 'Dish price', 'hbelv' ),
 						'id'    => '_plate-price',
-						'type'  => 'number',
+						'type'  => 'currency',
 						'std'   => '',
 						'title' => __( 'Dish price', 'hbelv' ),
 						'desc'  => __( 'Add price for dish', 'hbelv' )
