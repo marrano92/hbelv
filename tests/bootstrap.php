@@ -40,7 +40,7 @@ define( 'DOMAIN_CURRENT_SITE', '127.0.0.2' );
 abstract class HBELV_Framework_TestCase extends TestCase {
 
 	//setting mocks in the setUp might become a problem as times goes.
-	public function setUp() {
+	public function setUp():void {
 		parent::setUp();
 		\WP_Mock::setUp();
 
@@ -48,9 +48,6 @@ abstract class HBELV_Framework_TestCase extends TestCase {
 		\WP_Mock::passthruFunction( 'get_query_var' );
 		\WP_Mock::passthruFunction( 'sanitize_title' );
 		\WP_Mock::passthruFunction( 'number_format_i18n' );
-		\WP_Mock::userFunction( 'is_multisite', [ 'return' => true ] );
-		\WP_Mock::userFunction( 'get_stylesheet_directory', [ 'return' => '/public/wp-content/themes/drivek-style' ] );
-		\WP_Mock::userFunction( 'get_template_directory', [ 'return' => '/public/wp-content/themes/drivek' ] );
 	}
 
 	public function get_options( array $values = [] ) {
