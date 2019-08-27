@@ -3,18 +3,36 @@
 
 namespace Hbelv\Route;
 
-use Hbelv\{Route};
+use Hbelv\{Result\ApiResult\RoomSearchResult, Result\ApiResultInterface, Route, Template};
 
 class RoomSearch extends Route {
 
+	/**
+	 * Protected class var
+	 *
+	 * @var string $_template
+	 */
+	protected
+		$_template = 'parts/search.php';
 
-	public function get_data(){
+	/**
+	 * Child constructor calls parent's constructor
+	 *
+	 * It will only add the ajax actions if an endpoint is given
+	 *
+	 * @param array $request
+	 */
+	public function __construct(  array $request = [] ) {
+		parent::__construct( $request );
 
-		return new \stdClass();
+		$this->_slug = _x( 'search', 'Route URI', 'dkwp' );
 	}
 
 	public function add_rewrite_rule( int $position ){
+		$rewrite = sprintf( 'index.php?hbelv_route=%s', $position );
+		$uri     = apply_filters( __METHOD__, sprintf( '^%s', $this->_slug ) );
 
+		add_rewrite_rule( $uri, $rewrite, 'top' );
 	}
 
 	/**
@@ -43,6 +61,25 @@ class RoomSearch extends Route {
 	}
 
 	/**
+	 * Gets data
+	 *
+	 * @return ApiResultInterface
+	 *
+	 * @throws \Exception
+	 */
+	public function get_data(): ApiResultInterface {
+		static $data = null;
+
+		if ( is_null( $data ) ) {
+			$data = new RoomSearchResult( options_factory(), $this );
+
+			$data->make_request();
+		}
+
+		return $data;
+	}
+
+	/**
 	 * Filter: the_content
 	 *
 	 * @param string $content
@@ -50,7 +87,12 @@ class RoomSearch extends Route {
 	 * @return string
 	 */
 	public function the_content( string $content ): string {
-		return 'content';
+		$data     = $this->get_data();
+		$result   = $data->build_content();
+
+		$template = new Template( $this->_template );
+
+		return $template->load_template_part( $result );
 	}
 
 }

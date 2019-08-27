@@ -63,4 +63,9 @@ abstract class HBELV_Framework_TestCase extends TestCase {
 
 		return $mock;
 	}
+
+	public function tearDown():void {
+		parent::tearDown();
+		\WP_Mock::tearDown();
+	}
 }

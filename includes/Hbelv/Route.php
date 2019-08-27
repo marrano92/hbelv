@@ -18,7 +18,6 @@ abstract class Route {
 	 */
 	protected
 		$_request = [],
-		$_last_modification,
 		$_template,
 		$_slug;
 
@@ -29,8 +28,6 @@ abstract class Route {
 	 *
 	 * @param Proxy $endpoints
 	 * @param array $request
-	 *
-	 * @codeCoverageIgnore
 	 */
 	public function __construct( array $request = [] ) {
 			add_filter( 'query_vars', [ $this, 'query_vars' ] );

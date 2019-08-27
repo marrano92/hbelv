@@ -5,7 +5,6 @@
         convertErrorsToExceptions="true"
         convertNoticesToExceptions="true"
         convertWarningsToExceptions="true"
-        beStrictAboutTestSize="true"
         timeoutForSmallTests="5"
 >
     <testsuite name="Internal tests">

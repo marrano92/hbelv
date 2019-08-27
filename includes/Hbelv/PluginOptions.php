@@ -57,7 +57,6 @@ class PluginOptions {
 	/**
 	 * Factory
 	 *
-	 * @codeCoverageIgnore
 	 *
 	 * @param Locale $locale
 	 * @param string $options_name
@@ -84,7 +83,7 @@ class PluginOptions {
 			$registry->set( __CLASS__, $object );
 
 			add_action( 'hbelv/set_plugin_option', [ $object, 'set' ], 10, 2 );
-			add_filter( 'drivek_plugin_options', [ $object, 'get' ], 10, 2 );
+			add_filter( 'hbelv_plugin_options', [ $object, 'get' ], 10, 2 );
 		}
 
 		return $object;
@@ -113,6 +112,8 @@ class PluginOptions {
 	 * @param $key
 	 *
 	 * @return mixed
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function __get( $key ) {
 		return $this->get( $key );
@@ -120,7 +121,10 @@ class PluginOptions {
 
 	/**
 	 * Gets the name of the option
+	 *
 	 * @return string
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function get_name() {
 		return $this->option_name;

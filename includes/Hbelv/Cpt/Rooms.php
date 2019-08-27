@@ -43,6 +43,7 @@ class Rooms extends CustomPostType implements CptInterface, MetaBoxInterface {
 			'public'              => true,
 			'show_ui'             => true,
 			'show_in_menu'        => true,
+			'show_in_rest'        => true,
 			'menu_position'       => 20,
 			'menu_icon'           => 'dashicons-admin-network',
 			'rewrite'             => [
@@ -71,7 +72,7 @@ class Rooms extends CustomPostType implements CptInterface, MetaBoxInterface {
 			'new_item_name'     => __( 'New Type Room Name', 'textdomain' ),
 			'menu_name'         => __( 'Types Rooms', 'textdomain' ),
 		);
-		$args = array(
+		$args   = array(
 			'hierarchical'      => true,
 			'labels'            => $labels,
 			'show_ui'           => true,
