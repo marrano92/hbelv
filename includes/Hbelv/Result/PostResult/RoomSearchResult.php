@@ -1,21 +1,32 @@
 <?php
 
-namespace Hbelv\Result\ApiResult;
+namespace Hbelv\Result\PostResult;
 
 use Hbelv\FilterInput;
-use Hbelv\Result\ApiResult;
-use Hbelv\Result\ApiResultInterface;
+use Hbelv\Result\PostResult;
+use Hbelv\Result\PostResultInterface;
 
-class RoomSearchResult extends ApiResult implements ApiResultInterface {
+class RoomSearchResult extends PostResult implements PostResultInterface {
 
 	/**
 	 * @return array
 	 */
 	public function get_args() {
 		if ( empty( $this->_args ) ) {
+			$metaArgs = $this->_options->white_list;
 			$rows = ( new FilterInput( INPUT_GET, 'rows' ) )->get();
+			$metas = ( new FilterInput( INPUT_GET, 'rows' ) )->get();
+			foreach ($metas as $meta){
+
+			}
 			$args = [
 				'rows' => $rows ?? $this->_options->results_per_page,
+				'meta_query' => [
+					[
+						'key' => 'project_cat',
+						'value' => 'my-value',
+					]
+				],
 			];
 
 			$this->set_args( $args );
@@ -40,9 +51,9 @@ class RoomSearchResult extends ApiResult implements ApiResultInterface {
 	/**
 	 * Does the request
 	 *
-	 * @return ApiResultInterface
+	 * @return PostResultInterface
 	 */
-	public function make_request(): ApiResultInterface {
+	public function make_request(): PostResultInterface {
 		$args = $this->get_args();
 
 		$result = $this->get_result( $args );
