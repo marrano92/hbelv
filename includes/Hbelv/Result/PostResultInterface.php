@@ -9,14 +9,14 @@ namespace Hbelv\Result;
  * @package Dkwp\Result
  *
  */
-interface ApiResultInterface {
+interface PostResultInterface {
 
 	/**
 	 * Does the request
 	 *
-	 * @return ApiResultInterface
+	 * @return PostResultInterface
 	 */
-	public function make_request(): ApiResultInterface;
+	public function make_request(): PostResultInterface;
 
 	/**
 	 * Prepares the content object

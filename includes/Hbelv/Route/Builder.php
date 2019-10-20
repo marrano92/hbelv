@@ -3,6 +3,7 @@
 namespace Hbelv\Route;
 
 use Hbelv\BuilderInterface;
+use Hbelv\Proxy;
 use Hbelv\Rewrites;
 
 /**
@@ -19,11 +20,12 @@ class Builder implements BuilderInterface {
 	 */
 	public static function init() {
 		$options  = options_factory();
+		$proxy    = new Proxy();
 		$rewrites = Rewrites::init( $options );
 
-		$rewrites->add( new RoomSearch() );
+		$rewrites->add( new RoomSearch( $proxy ) );
 
-		add_filter( 'hotel_route', function() {
+		add_filter( 'hotel_route', function () {
 			return \Hbelv\Registry::create()->get( 'route' );
 		} );
 	}
