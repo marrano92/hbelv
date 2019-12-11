@@ -90,12 +90,15 @@ class Rewrites {
 	 */
 	public function request( $request ) {
 		if ( isset( $request['hbelv_route'] ) ) {
+			$endpoint = new Proxy( $_REQUEST );
+
 			/**
 			 * @var Route $route
 			 */
 			$route = $this->_routes[ $request['hbelv_route'] ];
 
 			$route->add_hooks();
+			$route->set_endpoints( $endpoint );
 			$route->set_request( $request );
 
 			Registry::create()->set( 'route', $route );
