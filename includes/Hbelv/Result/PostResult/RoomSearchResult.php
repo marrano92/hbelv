@@ -16,9 +16,7 @@ class RoomSearchResult extends PostResult implements PostResultInterface {
 			$metaArgs = $this->_options->white_list;
 			$rows = ( new FilterInput( INPUT_GET, 'rows' ) )->get();
 			$metas = ( new FilterInput( INPUT_GET, 'rows' ) )->get();
-			foreach ($metas as $meta){
 
-			}
 			$args = [
 				'rows' => $rows ?? $this->_options->results_per_page,
 				'meta_query' => [
