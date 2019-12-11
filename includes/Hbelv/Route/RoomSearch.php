@@ -3,11 +3,7 @@
 
 namespace Hbelv\Route;
 
-use Hbelv\Proxy;
-use Hbelv\Template;
-use Hbelv\Result\PostResult\RoomSearchResult;
-use Hbelv\Result\PostResultInterface;
-use Hbelv\Route;
+use Hbelv\{Result\ApiResult\RoomSearchResult, Result\ApiResultInterface, Route, Template};
 
 class RoomSearch extends Route {
 
@@ -20,18 +16,19 @@ class RoomSearch extends Route {
 		$_template = 'parts/search.php';
 
 	/**
-	 * RoomSearch constructor.
+	 * Child constructor calls parent's constructor
 	 *
-	 * @param Proxy|null $endpoints
+	 * It will only add the ajax actions if an endpoint is given
+	 *
 	 * @param array $request
 	 */
-	public function __construct( Proxy $endpoints = null, array $request = [] ) {
-		parent::__construct( $endpoints, $request );
+	public function __construct(  array $request = [] ) {
+		parent::__construct( $request );
 
 		$this->_slug = _x( 'search', 'Route URI', 'dkwp' );
 	}
 
-	public function add_rewrite_rule( int $position ) {
+	public function add_rewrite_rule( int $position ){
 		$rewrite = sprintf( 'index.php?hbelv_route=%s', $position );
 		$uri     = apply_filters( __METHOD__, sprintf( '^%s', $this->_slug ) );
 
@@ -39,30 +36,9 @@ class RoomSearch extends Route {
 	}
 
 	/**
-	 * Gets allowed AJAX object keys
-	 *
-	 * @return array
-	 */
-	public function get_ajax_keys(): array {
-		$hash = [
-			'cluster',
-			'makeName',
-			'makeAndSubModelCommercialName',
-			'bodyType',
-			'fuelType',
-			'tag_internal_space',
-			'tag_accessibility',
-			'traction',
-			'emissionsClass'
-		];
-
-		return apply_filters( __METHOD__, $hash );
-	}
-
-	/**
 	 * Action: prints structured data into the head of a page
 	 */
-	public function wp_structured_data() {
+	public function wp_structured_data(){
 		return '';
 	}
 
@@ -71,7 +47,7 @@ class RoomSearch extends Route {
 	 *
 	 * @return string
 	 */
-	public function wp_title(): string {
+	public function wp_title(): string{
 		return 'title';
 	}
 
@@ -87,11 +63,11 @@ class RoomSearch extends Route {
 	/**
 	 * Gets data
 	 *
-	 * @return PostResultInterface
+	 * @return ApiResultInterface
 	 *
 	 * @throws \Exception
 	 */
-	public function get_data(): PostResultInterface {
+	public function get_data(): ApiResultInterface {
 		static $data = null;
 
 		if ( is_null( $data ) ) {
@@ -111,8 +87,8 @@ class RoomSearch extends Route {
 	 * @return string
 	 */
 	public function the_content( string $content ): string {
-		$data   = $this->get_data();
-		$result = $data->build_content();
+		$data     = $this->get_data();
+		$result   = $data->build_content();
 
 		$template = new Template( $this->_template );
 

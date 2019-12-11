@@ -2,7 +2,6 @@
 
 namespace Hbelv;
 
-
 /**
  * Class Route
  * @package Hbelv
@@ -18,7 +17,6 @@ abstract class Route {
 	 * @var string $_slug
 	 */
 	protected
-		$_endpoints,
 		$_request = [],
 		$_template,
 		$_slug;
@@ -31,13 +29,16 @@ abstract class Route {
 	 * @param Proxy $endpoints
 	 * @param array $request
 	 */
-	public function __construct( Proxy $endpoints = null, array $request = [] ) {
-		if ( ! is_null( $endpoints ) ) {
+	public function __construct( array $request = [] ) {
 			add_filter( 'query_vars', [ $this, 'query_vars' ] );
 
-			$this->_endpoints = $endpoints;
+			$action = sprintf( 'dk/%s::the_uri', $this->sanitize_classname( get_called_class() ) );
+			if ( ! has_action( $action, [ $this, 'the_uri' ] ) ) {
+				add_action( $action, [ $this, 'the_uri' ] );
+			}
+
 			$this->_request   = $request;
-		}
+
 	}
 
 	/**
@@ -120,14 +121,6 @@ abstract class Route {
 	 */
 	abstract public function add_rewrite_rule( int $position );
 
-	/**
-	 * Set proxy endpoint
-	 *
-	 * @param Proxy $endpoints
-	 */
-	public function set_endpoints( Proxy $endpoints ) {
-		$this->_endpoints = $endpoints;
-	}
 
 	/**
 	 * Action: prints structured data into the head of a page

@@ -74,7 +74,6 @@ class PluginOptions {
 				$default_values = [
 					'plugin_lang'               => $locale->get_language(),
 					'results_per_page'       => '12',
-					'white_list' => ['price', 'size', 'guest', 'order']
 				];
 
 			}

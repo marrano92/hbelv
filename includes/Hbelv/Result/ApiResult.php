@@ -11,7 +11,7 @@ use Hbelv\Route;
 use Hbelv\Decorator\{DecoratorRooms};
 
 /**
- * Class PostResult
+ * Class ApiResult
  * @package Dkwp
  *
  * @method int get_numresult
@@ -29,9 +29,15 @@ use Hbelv\Decorator\{DecoratorRooms};
  * @method array get_trimlevels
  * @method array get_versions_hash
  * @method array get_models_hash
+ * @method DecoratorVersions[] get_versions
+ * @method DecoratorModels[] get_models
+ * @method DecoratorOffers[] get_offers
+ * @method DecoratorVersions get_version
+ * @method DecoratorSuggestions[] get_suggestions
+ * @method int get_numgroupedfound
  * @method Makes get_makes_post_object
  */
-class PostResult {
+class ApiResult {
 	/**
 	 * Protected class vars
 	 *
