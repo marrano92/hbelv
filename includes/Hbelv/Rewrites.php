@@ -90,7 +90,7 @@ class Rewrites {
 	 */
 	public function request( $request ) {
 		if ( isset( $request['hbelv_route'] ) ) {
-			$endpoint = new Proxy( $_REQUEST );
+			$endpoint = new Proxy( $this->_options, $_REQUEST );
 
 			/**
 			 * @var Route $route

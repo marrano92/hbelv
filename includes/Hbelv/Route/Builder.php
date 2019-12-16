@@ -20,7 +20,7 @@ class Builder implements BuilderInterface {
 	 */
 	public static function init() {
 		$options  = options_factory();
-		$proxy    = new Proxy();
+		$proxy    = new Proxy( $options );
 		$rewrites = Rewrites::init( $options );
 
 		$rewrites->add( new RoomSearch( $proxy ) );

@@ -3,10 +3,10 @@
 
 namespace Hbelv\Route;
 
+use Hbelv\Factories\Request\RequestFactory;
 use Hbelv\Proxy;
+use Hbelv\Result\RouteRequest\RoomSearchRequest;
 use Hbelv\Template;
-use Hbelv\Result\PostResult\RoomSearchResult;
-use Hbelv\Result\PostResultInterface;
 use Hbelv\Route;
 
 class RoomSearch extends Route {
@@ -28,7 +28,7 @@ class RoomSearch extends Route {
 	public function __construct( Proxy $endpoints = null, array $request = [] ) {
 		parent::__construct( $endpoints, $request );
 
-		$this->_slug = _x( 'search', 'Route URI', 'dkwp' );
+		$this->_slug = _x( 'RoomSearch', 'Route URI', 'dkwp' );
 	}
 
 	public function add_rewrite_rule( int $position ) {
@@ -60,13 +60,6 @@ class RoomSearch extends Route {
 	}
 
 	/**
-	 * Action: prints structured data into the head of a page
-	 */
-	public function wp_structured_data() {
-		return '';
-	}
-
-	/**
 	 * Filter: wp_title
 	 *
 	 * @return string
@@ -84,20 +77,18 @@ class RoomSearch extends Route {
 		return 'description';
 	}
 
+
 	/**
 	 * Gets data
 	 *
-	 * @return PostResultInterface
 	 *
 	 * @throws \Exception
 	 */
-	public function get_data(): PostResultInterface {
+	public function make_request() {
 		static $data = null;
 
 		if ( is_null( $data ) ) {
-			$data = new RoomSearchResult( options_factory(), $this );
-
-			$data->make_request();
+			$data = ( new RequestFactory( $this, $this->get_options() ) )->get_request();
 		}
 
 		return $data;
@@ -109,14 +100,14 @@ class RoomSearch extends Route {
 	 * @param string $content
 	 *
 	 * @return string
+	 * @throws \Exception
 	 */
 	public function the_content( string $content ): string {
-		$data   = $this->get_data();
-		$result = $data->build_content();
+		$data = $this->make_request();
 
 		$template = new Template( $this->_template );
 
-		return $template->load_template_part( $result );
+		return $template->load_template_part( $data );
 	}
 
 }

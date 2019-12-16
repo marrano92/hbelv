@@ -2,7 +2,6 @@
 
 namespace Hbelv;
 
-
 /**
  * Class Route
  * @package Hbelv
@@ -49,7 +48,7 @@ abstract class Route {
 	 *
 	 * @return Route
 	 */
-	public static function init(  array $request = [] ): self {
+	public static function init( array $request = [] ): self {
 		$obj = new static( $request );
 
 		$obj->add_hooks();
@@ -105,13 +104,6 @@ abstract class Route {
 	}
 
 	/**
-	 * Strategy
-	 *
-	 * @return ApiResult
-	 */
-	abstract public function get_data();
-
-	/**
 	 * Adds rewrite rule
 	 *
 	 * @param int $position
@@ -128,11 +120,6 @@ abstract class Route {
 	public function set_endpoints( Proxy $endpoints ) {
 		$this->_endpoints = $endpoints;
 	}
-
-	/**
-	 * Action: prints structured data into the head of a page
-	 */
-	abstract public function wp_structured_data();
 
 	/**
 	 * Filter: wp_title
@@ -219,6 +206,10 @@ abstract class Route {
 		return $obj->locate_template( $class );
 	}
 
+	public function get_type(){
+		return $this->_slug;
+	}
+
 	/**
 	 * Returns sanitized class name without namespace
 	 *
@@ -230,6 +221,15 @@ abstract class Route {
 		$parts = explode( '\\', $class );
 
 		return sanitize_title( end( $parts ) );
+	}
+
+	/**
+	 * Gets the plugin's option
+	 *
+	 * @return PluginOptions
+	 */
+	public function get_options(): PluginOptions {
+		return $this->_endpoints->get_options();
 	}
 
 	/**
@@ -317,7 +317,6 @@ abstract class Route {
 
 		return $data;
 	}
-
 
 
 	/**

@@ -6,27 +6,30 @@ namespace Hbelv;
 class Proxy {
 
 	/**
-	 * Protected class vars
-	 *
-	 * @var Api $_api
-	 * @var string $_vtype ,
-	 * @var array $_result
-	 * @var array $_filters
-	 * @var array $_facets
-	 * @var array $_slide_factes
+	 * @var array
 	 */
 	protected
 		$_result = [],
 		$_filters = [];
 
 	/**
+	 * @var PluginOptions
+	 */
+	protected $options;
+
+	/**
 	 * Constructor
 	 *
-	 * @param Api $api
+	 * @param PluginOptions $options
 	 * @param array $filters
 	 */
-	public function __construct(array $filters = [] ) {
+	public function __construct(PluginOptions $options,array $filters = [] ) {
+		$this->options = $options;
 		$this->set_filters( $filters );
+	}
+
+	public function get_options(){
+		return $this->options;
 	}
 
 	/**
