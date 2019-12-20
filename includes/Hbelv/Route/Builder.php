@@ -5,8 +5,7 @@ namespace Hbelv\Route;
 use Hbelv\BuilderInterface;
 use Hbelv\Content\SearchBuildContent;
 use Hbelv\Proxy;
-use Hbelv\request\SearchRequest;
-use Hbelv\Rewrites;
+use Hbelv\Request\SearchRequest;
 
 /**
  * Class RouteBuilder
@@ -25,7 +24,6 @@ class Builder implements BuilderInterface {
 		$proxy   = new Proxy( $options );
 
 		RoomSearch::init( SearchRequest::init(), SearchBuildContent::init(), $proxy );
-
 
 		add_filter( 'hotel_route', function () {
 			return \Hbelv\Registry::create()->get( 'route' );

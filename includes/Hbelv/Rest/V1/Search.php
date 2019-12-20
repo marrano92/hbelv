@@ -2,7 +2,11 @@
 
 namespace Hbelv\Rest\V1;
 
+use Hbelv\Content\SearchBuildContent;
+use Hbelv\Proxy;
+use Hbelv\request\SearchRequest;
 use Hbelv\Rest\HbelvV1;
+use Hbelv\Route\RoomSearch;
 
 class Search extends HbelvV1 {
 
@@ -23,9 +27,15 @@ class Search extends HbelvV1 {
 	 * Search Endpoint
 	 *
 	 * @param \WP_REST_Request $request
+	 *
+	 * @return mixed|\WP_REST_Response
 	 */
 	public function search( \WP_REST_Request $request ){
 		$options = options_factory();
+		$proxy   = new Proxy( $options );
 
+		$route = RoomSearch::init(SearchRequest::init(), SearchBuildContent::init(), $proxy);
+
+		return rest_ensure_response( $route->get_rest_result() );
 	}
 }

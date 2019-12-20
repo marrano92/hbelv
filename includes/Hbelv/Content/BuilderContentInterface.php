@@ -2,6 +2,9 @@
 
 namespace Hbelv\Content;
 
+
+use Hbelv\Request\Request;
+
 /**
  * Interface BuilderContentInterface
  *
@@ -9,6 +12,6 @@ namespace Hbelv\Content;
  */
 interface BuilderContentInterface {
 
-	public function build_content(): BuilderContentInterface;
+	public function build_content(Request $request): \stdClass;
 
 }

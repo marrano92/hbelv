@@ -1,11 +1,11 @@
 <?php
 
-namespace Hbelv\request;
+namespace Hbelv\Request;
 
 /**
  * Interface PostRequestInterface
  *
- * @package Hbelv\request
+ * @package Hbelv\Request
  */
 interface PostRequestInterface {
 

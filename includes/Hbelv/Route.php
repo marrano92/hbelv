@@ -61,16 +61,16 @@ abstract class Route {
 	 */
 	public static function init( Request $request, BuildContent $content, Proxy $endpoints = null ): self {
 		$registry = Registry::create();
-
-		if ( ! $registry->has( __CLASS__ ) ) {
-			$obj = new static( $request, $content, $endpoints );
+		$class    = get_called_class();
+		if ( ! $registry->has( $class ) ) {
+			$obj = new $class( $request, $content, $endpoints );
 
 			$obj->add_hooks();
 
-			$registry->set( __CLASS__, $obj );
+			$registry->set( $class, $obj );
 		}
 
-		return $registry->get( __CLASS__ );
+		return $registry->get( $class );
 	}
 
 	/**

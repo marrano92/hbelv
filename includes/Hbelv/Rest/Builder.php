@@ -4,6 +4,7 @@ namespace Hbelv\Rest;
 
 use Hbelv\BuilderInterface;
 use Hbelv\Proxy;
+use Hbelv\Rest\V1\Search;
 
 class Builder implements BuilderInterface {
 
@@ -11,6 +12,6 @@ class Builder implements BuilderInterface {
 		$options = options_factory();
 		$proxy   = new Proxy( $options );
 
-
+		Search::init( $proxy );
 	}
 }

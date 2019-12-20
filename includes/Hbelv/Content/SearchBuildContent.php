@@ -1,12 +1,18 @@
 <?php
 
-
 namespace Hbelv\Content;
 
+use Hbelv\Request\Request;
 
 class SearchBuildContent extends BuildContent implements BuilderContentInterface {
 
-	public function build_content(): BuilderContentInterface {
-		// TODO: Implement build_content() method.
+	/**
+	 *
+	 * @param Request $request
+	 *
+	 * @return \stdClass
+	 */
+	public function build_content( Request $request ): \stdClass {
+		return (object) ['var1' => 'result'];
 	}
 }

@@ -58,6 +58,7 @@ add_action( 'init', function () {
 	 */
 	\Hbelv\Cpt\Builder::init();
 	\Hbelv\Route\Builder::init();
+	\Hbelv\Rest\Builder::init();
 });
 
 /**

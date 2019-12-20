@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Hbelv\request;
+namespace Hbelv\Request;
 
 /**
  * Class Request
@@ -20,6 +20,6 @@ class Request {
 	 * @return Request
 	 */
 	public static function init() {
-		return new self();
+		return new static();
 	}
 }

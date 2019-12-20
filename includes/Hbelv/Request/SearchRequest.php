@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Hbelv\request;
+namespace Hbelv\Request;
 
 /**
  * Class SearchRequest
  *
- * @package Hbelv\request
+ * @package Hbelv\Request
  */
 class SearchRequest extends Request implements PostRequestInterface {
 
@@ -14,6 +14,6 @@ class SearchRequest extends Request implements PostRequestInterface {
 	 * @inheritDoc
 	 */
 	public function make_request(): PostRequestInterface {
-		// TODO: Implement make_request() method.
+		return $this;
 	}
 }

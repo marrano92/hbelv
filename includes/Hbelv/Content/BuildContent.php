@@ -14,7 +14,7 @@ class BuildContent {
 	 * @return BuildContent
 	 */
 	public static function init() {
-		return new self();
+		return new static();
 	}
 
 }

@@ -2,10 +2,11 @@
 
 namespace Hbelv\Route;
 
+use Hbelv\Content\BuildContent;
 use Hbelv\Content\SearchBuildContent;
-use Hbelv\Factories\Request\RequestFactory;
 use Hbelv\Proxy;
-use Hbelv\request\SearchRequest;
+use Hbelv\Request\Request;
+use Hbelv\Request\SearchRequest;
 use Hbelv\Template;
 use Hbelv\Route;
 
@@ -27,7 +28,7 @@ class RoomSearch extends Route {
 	 * @param Proxy|null $endpoints
 	 * @param array $request
 	 */
-	public function __construct( SearchRequest $request, SearchBuildContent $content, Proxy $endpoints = null ) {
+	public function __construct( Request $request, BuildContent $content, Proxy $endpoints = null ) {
 		parent::__construct( $request, $content, $endpoints );
 
 		$this->_slug = _x( 'RoomSearch', 'Route URI', 'dkwp' );
@@ -79,23 +80,6 @@ class RoomSearch extends Route {
 		return 'description';
 	}
 
-
-	/**
-	 * Gets data
-	 *
-	 *
-	 * @throws \Exception
-	 */
-	public function make_request() {
-		static $data = null;
-
-		if ( is_null( $data ) ) {
-			$data = ( new RequestFactory( $this, $this->get_options() ) )->get_request();
-		}
-
-		return $data;
-	}
-
 	/**
 	 * Filter: the_content
 	 *
@@ -106,10 +90,16 @@ class RoomSearch extends Route {
 	 */
 	public function the_content( string $content ): string {
 		$data_request = $this->_request->make_request();
+		$content = $this->_content->build_content( $data_request );
 
 		$template = new Template( $this->_template );
 
-		return $template->load_template_part( $data_request );
+		return $template->load_template_part( $content );
 	}
 
+	public function get_rest_result() {
+		$data_request = $this->_request->make_request();
+
+		return $this->_content->build_content( $data_request );
+	}
 }
