@@ -2,6 +2,11 @@
 
 namespace Hbelv;
 
+use Hbelv\Content\BuildContent;
+use Hbelv\Content\SearchBuildContent;
+use Hbelv\request\Request;
+use Hbelv\request\SearchRequest;
+
 /**
  * Class Route
  * @package Hbelv
@@ -20,22 +25,25 @@ abstract class Route {
 		$_endpoints,
 		$_request = [],
 		$_template,
-		$_slug;
+		$_slug,
+		$_content;
 
 	/**
 	 * Constructor
 	 *
 	 * It will only add a query vars filter if an endpoint is given
 	 *
+	 * @param SearchRequest $request
+	 * @param SearchBuildContent $content
 	 * @param Proxy $endpoints
-	 * @param array $request
 	 */
-	public function __construct( Proxy $endpoints = null, array $request = [] ) {
+	public function __construct( Request $request, BuildContent $content, Proxy $endpoints = null ) {
 		if ( ! is_null( $endpoints ) ) {
 			add_filter( 'query_vars', [ $this, 'query_vars' ] );
 
 			$this->_endpoints = $endpoints;
 			$this->_request   = $request;
+			$this->_content   = $content;
 		}
 	}
 
@@ -46,14 +54,23 @@ abstract class Route {
 	 *
 	 * @param array $request
 	 *
+	 * @param $content
+	 * @param $endpoints
+	 *
 	 * @return Route
 	 */
-	public static function init( array $request = [] ): self {
-		$obj = new static( $request );
+	public static function init( Request $request, BuildContent $content, Proxy $endpoints = null ): self {
+		$registry = Registry::create();
 
-		$obj->add_hooks();
+		if ( ! $registry->has( __CLASS__ ) ) {
+			$obj = new static( $request, $content, $endpoints );
 
-		return $obj;
+			$obj->add_hooks();
+
+			$registry->set( __CLASS__, $obj );
+		}
+
+		return $registry->get( __CLASS__ );
 	}
 
 	/**
@@ -206,7 +223,7 @@ abstract class Route {
 		return $obj->locate_template( $class );
 	}
 
-	public function get_type(){
+	public function get_type() {
 		return $this->_slug;
 	}
 

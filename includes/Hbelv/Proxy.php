@@ -23,12 +23,12 @@ class Proxy {
 	 * @param PluginOptions $options
 	 * @param array $filters
 	 */
-	public function __construct(PluginOptions $options,array $filters = [] ) {
+	public function __construct( PluginOptions $options, array $filters = [] ) {
 		$this->options = $options;
 		$this->set_filters( $filters );
 	}
 
-	public function get_options(){
+	public function get_options() {
 		return $this->options;
 	}
 
