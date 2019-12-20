@@ -31,7 +31,7 @@ class RoomSearch extends Route {
 	public function __construct( Request $request, BuildContent $content, Proxy $endpoints = null ) {
 		parent::__construct( $request, $content, $endpoints );
 
-		$this->_slug = _x( 'RoomSearch', 'Route URI', 'dkwp' );
+		$this->_slug = _x( 'search', 'Route URI', 'hbelv' );
 	}
 
 	public function add_rewrite_rule( int $position ) {

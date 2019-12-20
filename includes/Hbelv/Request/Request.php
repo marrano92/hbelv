@@ -6,9 +6,17 @@ namespace Hbelv\Request;
 /**
  * Class Request
  *
- * @package Hbelv\request
+ * @package Hbelv\Request
  */
 class Request {
+
+	/**
+	 * Protected class var
+	 *
+	 * @var \stdClass $_result
+	 */
+	protected
+		$_result;
 
 	/**
 	 * Request constructor.

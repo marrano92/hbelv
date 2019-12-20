@@ -7,7 +7,7 @@ namespace Hbelv;
 
 /**
  * Class Decorator
- * @package Dkwp
+ * @package Hbelv
  */
 class Decorator {
 
@@ -152,7 +152,7 @@ class Decorator {
 
 	/**
 	 * String conversion
-	 * 
+	 *
 	 * @return string
 	 */
 	public function __toString() {

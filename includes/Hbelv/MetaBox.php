@@ -64,7 +64,7 @@ class MetaBox {
 					'show_box'
 				], $box['page'], $box['context'], $box['priority'] );
 			} else {
-				throw new \InvalidArgumentException( __( 'Duplicate Key in Metabox configuration', 'dkwp' ) );
+				throw new \InvalidArgumentException( __( 'Duplicate Key in Metabox configuration', 'hbelv' ) );
 			}
 		}
 	}

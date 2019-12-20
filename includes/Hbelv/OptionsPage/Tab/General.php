@@ -14,7 +14,7 @@ class General extends Tab {
 	 * @return string
 	 */
 	public function get_name(): string {
-		return _x( 'General Settings', 'OptionsPage', 'dkwp' );
+		return _x( 'General Settings', 'OptionsPage', 'hbelv' );
 	}
 
 	/**
@@ -25,7 +25,7 @@ class General extends Tab {
 	 * @return void
 	 */
 	public function section() {
-		printf( '<p>%s</p>', _x( 'Please check twice what you set here!', 'OptionsPage', 'dkwp' ) );
+		printf( '<p>%s</p>', _x( 'Please check twice what you set here!', 'OptionsPage', 'hbelv' ) );
 
 		add_settings_field(
 			'slide_home',

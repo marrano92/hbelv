@@ -13,6 +13,14 @@ class SearchBuildContent extends BuildContent implements BuilderContentInterface
 	 * @return \stdClass
 	 */
 	public function build_content( Request $request ): \stdClass {
-		return (object) ['var1' => 'result'];
+		$posts   = $request->get_result();
+		$content = new \stdClass();
+
+		foreach ( $posts as $post ) {
+			$title = $post->post_title;
+			$content->$title = $post;
+		}
+
+		return $content;
 	}
 }

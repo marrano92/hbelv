@@ -23,10 +23,11 @@ abstract class Route {
 	 */
 	protected
 		$_endpoints,
-		$_request = [],
+		$_request,
 		$_template,
 		$_slug,
-		$_content;
+		$_content,
+		$_wp_request;
 
 	/**
 	 * Constructor
@@ -60,17 +61,9 @@ abstract class Route {
 	 * @return Route
 	 */
 	public static function init( Request $request, BuildContent $content, Proxy $endpoints = null ): self {
-		$registry = Registry::create();
-		$class    = get_called_class();
-		if ( ! $registry->has( $class ) ) {
-			$obj = new $class( $request, $content, $endpoints );
+		$class = get_called_class();
 
-			$obj->add_hooks();
-
-			$registry->set( $class, $obj );
-		}
-
-		return $registry->get( $class );
+		return new $class( $request, $content, $endpoints );
 	}
 
 	/**
@@ -117,7 +110,7 @@ abstract class Route {
 	 * @param array $request
 	 */
 	public function set_request( array $request ) {
-		$this->_request = $request;
+		$this->_wp_request = $request;
 	}
 
 	/**
