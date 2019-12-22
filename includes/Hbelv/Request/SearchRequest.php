@@ -14,17 +14,29 @@ class SearchRequest extends Request implements PostRequestInterface {
 	 * @inheritDoc
 	 */
 	public function make_request(): PostRequestInterface {
-		$args = [
-			'post_type' => 'rooms',
-		];
+		static $obj = null;
 
-		$query         = ( new \WP_Query( $args ) )->get_posts();
-		$this->_result = $query;
+		if ( empty( $obj ) ) {
+			$obj  = new static();
 
-		return $this;
+			$args = [
+				'post_type' => 'rooms',
+			];
+
+			$rooms = ( new \WP_Query( $args ) )->get_posts();
+
+			foreach ( $rooms as $room ) {
+				$meta       = get_post_meta( $room->ID );
+				$room->meta = $meta;
+			}
+
+			$obj->set_rooms( $rooms );
+		}
+
+		return $obj;
 	}
 
-	public function get_result(){
+	public function get_result() {
 		return $this->_result;
 	}
 }

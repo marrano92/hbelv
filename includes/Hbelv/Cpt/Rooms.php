@@ -114,6 +114,14 @@ class Rooms extends CustomPostType implements CptInterface, MetaBoxInterface {
 						'desc'  => __( 'Insert the number of guest for this room', 'hbelv' )
 					],
 					[
+						'name'  => __( 'Bed number', 'hbelv' ),
+						'id'    => '_room-bed',
+						'type'  => 'number',
+						'std'   => '',
+						'title' => __( 'Room bed', 'hbelv' ),
+						'desc'  => __( 'Insert the number of bed for this room', 'hbelv' )
+					],
+					[
 						'name'  => __( 'Room size', 'hbelv' ),
 						'id'    => '_room-size',
 						'type'  => 'number',

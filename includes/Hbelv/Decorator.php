@@ -87,16 +87,6 @@ class Decorator {
 		return null;
 	}
 
-	/**
-	 * Gets a currency
-	 *
-	 * @param number
-	 *
-	 * @return string
-	 */
-	public static function get_currency( $value ): string {
-		return sprintf( __( '€ %s', 'hbelv' ), number_format_i18n( $value, 0 ) ) ;
-	}
 
 	/**
 	 * @param string $key
@@ -108,6 +98,17 @@ class Decorator {
 		$value = $this->__get( $key );
 
 		return $value ? number_format_i18n( $value, $decimals ) : '';
+	}
+
+	/**
+	 * Gets a currency
+	 *
+	 * @param number
+	 *
+	 * @return string
+	 */
+	public static function get_currency( $value ): string {
+		return sprintf( __( '€ %s', 'hbelv' ), number_format_i18n( $value, 0 ) );
 	}
 
 	/**
@@ -136,18 +137,6 @@ class Decorator {
 		$date = new \DateTime( $value );
 
 		return date_i18n( get_option( 'date_format' ), $date->getTimestamp() );
-	}
-
-	/**
-	 * Gets a price range
-	 *
-	 * @param number $min
-	 * @param number $max
-	 *
-	 * @return string
-	 */
-	public static function get_price_range( $min, $max ): string {
-		return sprintf( _x( 'from %s to %s', 'Price Range', 'hbelv' ), self::get_currency( $min ), self::get_currency( $max ) );
 	}
 
 	/**
